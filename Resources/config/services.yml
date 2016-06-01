@@ -1,0 +1,4 @@
+services:
+#    s3_image.example:
+#        class: blackknight467\S3ImageBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

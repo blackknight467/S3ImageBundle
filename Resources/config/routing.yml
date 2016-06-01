@@ -1,0 +1,3 @@
+s3_image_homepage:
+    path:     /
+    defaults: { _controller: S3ImageBundle:Default:index }
