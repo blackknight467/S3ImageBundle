@@ -1,0 +1,25 @@
+{
+  "name": "blackknight467/s3-image-bundle",
+  "type": "symfony-bundle",
+  "description": "Amazon S3 Bundle for use with Symfony 3.  This bundle adds form types for image upload to s3. A doctrine entity to save and reference the uploaded images, and instructions for image resizing code using amazon lambda. Simple and easy to use.",
+  "keywords": ["s3", "aws", "amazon", "dropzone", "upload","bundle", "symfony", "symfony2", "symfony3"],
+  "homepage": "http://github.com/blackknight467/S3ImageBundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Derick Felsman",
+      "email": "derickfelsman@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9"
+  },
+  "require-dev": {
+    "symfony/framework-bundle": ">=3.0"
+  },
+  "autoload": {
+    "psr-0": { "blackknight467\\S3ImageBundle": "" }
+  },
+  "minimum-stability": "dev",
+  "target-dir": "blackknight467/S3ImageBundle"
+}
