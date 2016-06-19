@@ -45,6 +45,17 @@ class S3ImageExtension extends Extension
             $config['amazon_s3']['read_bucket_name']
         );
 
+        // s3 region
+        if (!isset($config['amazon_s3']['aws_region'])) {
+            throw new \InvalidArgumentException(
+                'The option "blackknight467.s3_image.aws_region" must be set.'
+            );
+        }
+        $container->setParameter(
+            'blackknight467.s3_image.aws_region',
+            $config['amazon_s3']['aws_region']
+        );
+
         // base url
         if (!isset($config['amazon_s3']['base_url'])) {
             throw new \InvalidArgumentException(
