@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('local_temp_image_folder')->info('the local folder where uploaded images temporarily reside')->isRequired()->end()
                 ->scalarNode('image_cdn')->info('the image cdn url')->end()
                 ->arrayNode('amazon_s3')
                     ->children()

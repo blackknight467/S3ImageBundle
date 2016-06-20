@@ -67,6 +67,17 @@ class S3ImageExtension extends Extension
             $config['amazon_s3']['base_url']
         );
 
+        // local temporary image storage
+        if (!isset($config['local_temp_image_folder'])) {
+            throw new \InvalidArgumentException(
+                'The option "blackknight467.s3_image.local_temp_image_folder" must be set.'
+            );
+        }
+        $container->setParameter(
+            'blackknight467.s3_image.local_temp_image_folder',
+            $config['local_temp_image_folder']
+        );
+
         // image sizes
         if (!isset($config['image_sizes'])) {
             throw new \InvalidArgumentException(
@@ -105,7 +116,7 @@ class S3ImageExtension extends Extension
         }
         if (isset($config['image_cdn'])) {
             $container->setParameter(
-                'blackknight467.image_cdn',
+                'blackknight467.s3_image.image_cdn',
                 $config['image_cdn']
             );
         }

@@ -1,4 +1,13 @@
 services:
-#    s3_image.example:
-#        class: blackknight467\S3ImageBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    s3_image.service.image:
+        class: blackknight467\S3ImageBundle\Service\ImageService
+        arguments:
+            - "%blackknight467.s3_image.aws_key%"
+            - "%blackknight467.s3_image.aws_secret_key%"
+            - "%blackknight467.s3_image.aws_region%"
+            - "%blackknight467.s3_image.upload_bucket_name%"
+            - "%blackknight467.s3_image.read_bucket_name%"
+            - "%blackknight467.s3_image.image_cdn%"
+            - "%blackknight467.s3_image.local_temp_image_folder%"
+            - "%blackknight467.s3_image.root_path%"
+            - @doctrine.orm.entity_manager
