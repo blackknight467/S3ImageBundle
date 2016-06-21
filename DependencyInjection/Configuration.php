@@ -46,6 +46,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->scalarNode('root_path')
                             ->info('the starting location for all uploads.  defaults to bucket root')
+                            ->defaultValue('/')
                         ->end()
                     ->end()
                 ->end()
