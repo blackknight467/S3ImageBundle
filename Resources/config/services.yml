@@ -10,4 +10,4 @@ services:
             - "%blackknight467.s3_image.image_cdn%"
             - "%blackknight467.s3_image.local_temp_image_folder%"
             - "%blackknight467.s3_image.root_path%"
-            - @doctrine.orm.entity_manager
+            - "@doctrine.orm.entity_manager"

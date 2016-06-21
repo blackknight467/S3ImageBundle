@@ -95,6 +95,21 @@ class S3ImageExtension extends Extension
             $config['image_sizes']
         );
 
+        if (isset($config['amazon_s3']['root_path'])) {
+            $container->setParameter(
+                'blackknight467.s3_image.root_path',
+                $config['amazon_s3']['root_path']
+            );
+        } else {
+            throw new \InvalidArgumentException('Root Path not provided for s3 Image bundle');
+        }
+
+        //set defaults for now
+        $container->setParameter('blackknight467.s3_image.aws_key', null);
+        $container->setParameter('blackknight467.s3_image.aws_secret_key', null);
+        $container->setParameter('blackknight467.s3_image.image_cdn', null);
+
+
         //optional AWS configs(if you're on aws, these are not required as long as you have permissions set up right)
         if (isset($config['amazon_s3']['aws_key'])) {
             $container->setParameter(
@@ -106,12 +121,6 @@ class S3ImageExtension extends Extension
             $container->setParameter(
                 'blackknight467.s3_image.aws_secret_key',
                 $config['amazon_s3']['aws_secret_key']
-            );
-        }
-        if (isset($config['amazon_s3']['root_path'])) {
-            $container->setParameter(
-                'blackknight467.s3_image.root_path',
-                $config['amazon_s3']['root_path']
             );
         }
         if (isset($config['image_cdn'])) {

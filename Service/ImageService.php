@@ -114,24 +114,30 @@ class ImageService
             $tempPath = sprintf('%s/uploads/%s', getcwd(), $imageName);
         }
 
-        // handles file uploaded via a form
         $success = true;
         if (is_uploaded_file($localPath)) {
+            // handles file uploaded via a form
             $success = move_uploaded_file($localPath, $tempPath);
             if (!$success) {
-                throw new \Exception('Failed up upload file');
+                // delete file from local server
+                unlink($localPath);
+                throw new \Exception('Failed to upload file');
             }
-        }
-        // handles regular files
-        else {
+        } else {
+            // handles regular files
             $sucess = rename($localPath, $tempPath);
             if (!$sucess) {
-                throw new \Exception('Failed up rename file');
+                // delete file from local server
+                unlink($localPath);
+                throw new \Exception('Failed to rename file');
             }
         }
 
         if ($success) {
             $this->upload($tempPath, $image->getPath(), $imageName);
+
+            // delete file from local server
+            unlink($tempPath);
 
             // save image
             $this->em->persist($image);
@@ -150,16 +156,13 @@ class ImageService
     public function uploadImageToS3($fromPath, $toPath)
     {
         // Upload a publicly accessible file. The file size and type are determined by the SDK.
-        try {
-            $this->s3Client->putObject([
-                'Bucket' => $this->uploadBucket,
-                'Key'    => $toPath,
-                'Body'   => fopen($fromPath, 'r'),
-                'ACL'    => 'public-read',
-            ]);
-        } catch (\Exception $e) {
-            echo "There was an error uploading the file.\n";
-        }
+        $this->s3Client->putObject([
+            'Bucket' => $this->uploadBucket,
+            'Key'    => $toPath,
+            'Body'   => fopen($fromPath, 'r'),
+            'ACL'    => 'public-read',
+        ]);
+
 
         // We can poll the object until it is accessible
         $this->s3Client->waitUntil('ObjectExists', array(
